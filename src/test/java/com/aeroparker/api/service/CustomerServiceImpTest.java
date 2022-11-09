@@ -3,7 +3,7 @@ package com.aeroparker.api.service;
 import com.aeroparker.api.entity.Customers;
 import com.aeroparker.api.exception.AeroParkerException;
 import com.aeroparker.api.model.CustomersVO;
-import com.aeroparker.api.repository.DataBaseAccessJpa;
+import com.aeroparker.api.repository.DataAccessRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ class CustomerServiceImpTest {
     private CustomerServiceImp customerServiceImp;
 
     @Mock
-    private DataBaseAccessJpa dataBaseAccessJpa;
+    private DataAccessRepo dataAccessRepo;
 
     @Mock
     private ValidationServiceImp validationService;
@@ -39,29 +39,28 @@ class CustomerServiceImpTest {
                 .city("NewCastle")
                 .postCode("XYZ 30Y")
                 .build();
-
     }
 
     @Test
     void testCustomersAddedSuccessfully() {
         when(validationService.validateData(getSampleCustomerVOData())).thenReturn(Collections.emptySet());
-        when(dataBaseAccessJpa.save(any(Customers.class))).thenReturn(SampleData.getCustomerData());
+        when(dataAccessRepo.save(any(Customers.class))).thenReturn(SampleData.getCustomerData());
         String response = customerServiceImp.addCustomer(getSampleCustomerVOData());
         Assertions.assertEquals(SUCCESSFUL, response);
-        verify(dataBaseAccessJpa, times(1)).save(any(Customers.class));
+        verify(dataAccessRepo, times(1)).save(any(Customers.class));
     }
 
     @Test
     void testCustomerDataFailToAddDueToUnknownDBIssue() {
         when(validationService.validateData(getSampleCustomerVOData())).thenReturn(Collections.emptySet());
-        doThrow(new RuntimeException("some error has occurred")).when(dataBaseAccessJpa).save(any(Customers.class));
+        doThrow(new RuntimeException("some error has occurred")).when(dataAccessRepo).save(any(Customers.class));
         Assertions.assertThrows(RuntimeException.class, () -> customerServiceImp.addCustomer(getSampleCustomerVOData()));
     }
 
     @Test
     void testWhenCustomerDataInvalidThenThrowInvalidDataException() {
         when(validationService.validateData(getSampleCustomerVOData())).thenReturn(Collections.emptySet());
-        doThrow(new RuntimeException("some error has occurred")).when(dataBaseAccessJpa).save(any(Customers.class));
+        doThrow(new RuntimeException("some error has occurred")).when(dataAccessRepo).save(any(Customers.class));
         Assertions.assertThrows(RuntimeException.class, () -> customerServiceImp.addCustomer(getSampleCustomerVOData()));
     }
 

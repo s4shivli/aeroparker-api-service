@@ -1,7 +1,7 @@
 package com.aeroparker.api.service;
 
 import com.aeroparker.api.model.CustomersVO;
-import com.aeroparker.api.repository.DataBaseAccessJpa;
+import com.aeroparker.api.repository.DataAccessRepo;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
@@ -18,17 +18,17 @@ public class ValidationServiceImp implements ValidationService{
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
-    private final DataBaseAccessJpa dataBaseAccessJpa;
+    private final DataAccessRepo dataAccessRepo;
 
     public static final String EMAIL_VALIDATION_MESSAGE = "Email address is present";
 
-    public ValidationServiceImp(DataBaseAccessJpa dataBaseAccessJpa) {
-        this.dataBaseAccessJpa = dataBaseAccessJpa;
+    public ValidationServiceImp(DataAccessRepo dataAccessRepo) {
+        this.dataAccessRepo = dataAccessRepo;
     }
 
     public Set<String> validateData(CustomersVO customerVO) {
         Set<String> validationMessages = new HashSet<>();
-        String returnEmailAddress = dataBaseAccessJpa.getByEmailAddress(customerVO.getEmailAddress());
+        String returnEmailAddress = dataAccessRepo.getByEmailAddress(customerVO.getEmailAddress());
 
         if (returnEmailAddress != null) {
             validationMessages.add(EMAIL_VALIDATION_MESSAGE);

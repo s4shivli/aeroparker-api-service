@@ -3,7 +3,7 @@ package com.aeroparker.api.service;
 import com.aeroparker.api.entity.Customers;
 import com.aeroparker.api.exception.AeroParkerException;
 import com.aeroparker.api.model.CustomersVO;
-import com.aeroparker.api.repository.DataBaseAccessJpa;
+import com.aeroparker.api.repository.DataAccessRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,12 @@ import java.util.Set;
 @Service
 @Slf4j
 public class CustomerServiceImp implements CustomerService {
-    private final DataBaseAccessJpa dataBaseAccessJpa;
+    private final DataAccessRepo dataAccessRepo;
     private final ValidationService validationService;
     public static final String SUCCESSFUL = "Form submitted successfully";
 
-    CustomerServiceImp(DataBaseAccessJpa dataBaseAccessJpa, ValidationServiceImp validationService) {
-        this.dataBaseAccessJpa = dataBaseAccessJpa;
+    CustomerServiceImp(DataAccessRepo dataAccessRepo, ValidationServiceImp validationService) {
+        this.dataAccessRepo = dataAccessRepo;
         this.validationService = validationService;
     }
 
@@ -47,7 +47,7 @@ public class CustomerServiceImp implements CustomerService {
 
         Customers customer = convertCustomerVOToCustomersDbEntity(customerVO);
         try {
-            dataBaseAccessJpa.save(customer);
+            dataAccessRepo.save(customer);
             return SUCCESSFUL;
         } catch (Exception exception) {
             log.error("Error in adding customer data ", exception);
