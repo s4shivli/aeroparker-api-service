@@ -14,12 +14,13 @@ import javax.validation.constraints.Size;
 public class CustomersVO {
     @Email(message = "Email is not valid")
     @Size(max = 255, message = "Email length exceeded")
+    @NotEmpty(message = "Email address can not be empty")
     private String emailAddress;
 
     @Size(max = 5, message = "Title length exceeded")
     @NotEmpty(message = "Title can not be empty")
-
     private String title;
+
     @Size(max = 50, message = "First name length exceeded")
     @NotEmpty(message = "First name can not be empty")
     private String firstName;
