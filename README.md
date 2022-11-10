@@ -9,7 +9,16 @@ POST : http://localhost:8080/registration
 
 1. Sample Payload for Successful submission. 
 Response ( Http Status OK- 200)
-
+{"emailAddress":"lhamma24@gmail.coM",
+"title":"Mrs",
+"firstName":"ghdtr",
+"lastName":"Xolxo",
+"addressLine1":" 24 wellington road",
+"addressLine2":"North Shileds",
+"city":"Newcastle",
+"postCode":"sx12 4ty",
+"phoneNumber":"1234567"
+}
 
 2. Sample Payload with having missing Cutomer Data ( Validation issue).  
 Response ( Http Status Bad Data - 400)
