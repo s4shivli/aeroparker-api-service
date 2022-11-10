@@ -61,7 +61,7 @@ Custom Exception for validation,  Controller advise for handling exception.
 
 **Code Modularity and cleanness** - Followed SOLID princes, Object Oriented Interface approach, and Cleaning coding including using Lombok 
 
-Junit Coverage - 100% for srvices, controller 
+Junit Coverage - 100% for services, controller, repository, validation logic 
 ![image](https://user-images.githubusercontent.com/116227949/201052087-9a302227-77d6-4355-80fa-01ec917ff3fa.png)
 
 
