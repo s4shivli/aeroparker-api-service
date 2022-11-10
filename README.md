@@ -16,7 +16,23 @@ Response ( Http Status Bad Data - 400)
 
 
 - SQL Scripts :
+drop table if exists customers;
 
+create table customers
+(
+    id             integer      not null,
+    address_line_1 varchar(255) not null,
+    address_line_2 varchar(255),
+    city           varchar(255),
+    email_address  varchar(255) not null,
+    first_name     varchar(50)  not null,
+    last_name      varchar(50)  not null,
+    phone_number   varchar(20),
+    post_code      varchar(10)  not null,
+    registered     timestamp,
+    title          varchar(5)   not null,
+    primary key (id)
+)
 
 - Error handling 
 Custom Exception for validation,  Controller advise for handling exception. 
@@ -24,4 +40,6 @@ Custom Exception for validation,  Controller advise for handling exception.
 Code Modularity and cleanness - Followed SOLID princes, Object Oriented Interface approach, and Cleaning coding including using Lombok 
 
 Junit Coverage - 100% for srvices, controller 
+![image](https://user-images.githubusercontent.com/116227949/201052087-9a302227-77d6-4355-80fa-01ec917ff3fa.png)
+
 
