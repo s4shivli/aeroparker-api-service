@@ -2,7 +2,7 @@
 This service is for Aero parker Customer Service; This is an API based light weight serverless application on the below technology 
 - Java, Springboot, Junit, Lombok , Javax Validator 
 - Restful Api - Json message format
-- H2 In memmory Data Base with JPA ( Copitable with SQL like MySQL/Oracle Data Base)
+- H2 In memmory Data Base with JPA ( Compitable with SQL like MySQL/Oracle Data Base)
 
 This service has the following Api end point for submitting Cutomner Resgistration Form 
 POST : http://localhost:8080/registration
